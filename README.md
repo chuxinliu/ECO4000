@@ -1,5 +1,5 @@
 # ECO4000
-### Can you teach Python in your Intro to Econometrics class? 
+### Can you teach Python in your **Intro to Econometrics** class? 
 ### YES! Here's how easy it is!
 
 1. Use Jupyter Notebook online version
