@@ -1,0 +1,73 @@
+!pip install linearmodels
+
+import numpy as np
+import pandas as pd
+import statsmodels.api as sm
+import statsmodels.formula.api as smf
+
+# Open your CPS80 from Pearson's website
+df1 = pd.read_stata('https://wps.pearsoned.com/wps/media/objects/11422/11696965/empirical/empex_tb/cps08.dta')
+df1
+
+df1.head()
+
+# To estimate the constant term beta_0, we need to add a column of 1's to our dataset
+df1['const'] = 1
+df1.head()
+
+reg1 = sm.OLS(endog=df1['ahe'], exog=df1[['const', 'age', 'female', 'bachelor']])
+results = reg1.fit()
+print(results.summary())
+
+# generate log(ahe)
+df1['lahe'] = np.log(df1['ahe'])
+df1.head()
+
+reg2 = sm.OLS(endog=df1['lahe'], exog=df1[['const', 'age', 'female', 'bachelor']])
+results = reg2.fit()
+print(results.summary())
+
+# generate log(age)
+df1['lage'] = np.log(df1['age'])
+df1.head()
+
+reg3 = sm.OLS(endog=df1['lahe'], exog=df1[['lage','female', 'bachelor', 'const']])
+results = reg3.fit()
+print(results.summary())
+
+print(100*0.8039*(np.log(36)-np.log(35)))
+
+# generate age-square
+df1['age2'] = df1['age']*df1['age']
+df1.head()
+
+reg4 = sm.OLS(endog=df1['ahe'], exog=df1[['const', 'age', 'age2', 'female', 'bachelor']])
+results = reg4.fit()
+print(results.summary())
+
+print(-8.8373+1.1457*40-0.0095*40*40-3.6635*1+8.0856*1)
+
+regression = 'ahe~age+age2+female+bachelor'
+hypothesis = 'age=age2=0'
+results =smf.ols(regression, df1).fit()
+f_test=results.f_test(hypothesis)
+print(f_test)
+
+# generate age*female
+df1['agefemale'] = df1['age']*df1['female']
+df1.head()
+
+reg5 = sm.OLS(endog=df1['lahe'], exog=df1[['const', 'age','agefemale', 'female', 'bachelor']])
+results = reg5.fit()
+print(results.summary())
+
+# generate age*bachelor
+df1['ageXbachelor'] = df1['age']*df1['bachelor']
+df1.head()
+
+reg6 = sm.OLS(endog=df1['lahe'], exog=df1[['const', 'age','ageXbachelor', 'female', 'bachelor']])
+results = reg6.fit()
+print(results.summary())
+
+print(2.1168+0.0192*40+0.0167*40*1-0.1844*1-0.0649*1)
+
