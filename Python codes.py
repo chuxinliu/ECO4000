@@ -2,6 +2,8 @@
 
 !pip install linearmodels
 
+!pip install xlrd
+
 import numpy as np
 import matplotlib.pyplot as plt
 %matplotlib inline
@@ -10,7 +12,7 @@ import statsmodels.api as sm
 from statsmodels.iolib.summary2 import summary_col
 from linearmodels.iv import IV2SLS
 
-df1 = pd.read_csv('Growth.csv')
+df1 = pd.read_excel('Growth.xls')
 df1.head()
 
 df1.describe()
