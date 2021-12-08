@@ -9,7 +9,8 @@ import statsmodels.api as sm
 import statsmodels.formula.api as smf
 
 # load data
-df1 = pd.read_excel('cps08.xls')
+# there is an issue with the xlsx file on the program, so we use this web data set provided by Pearson (which is the same)
+df1 = pd.read_stata('https://wps.pearsoned.com/wps/media/objects/11422/11696965/empirical/empex_tb/cps08.dta')
 df1.head()
 
 # summary statistics
@@ -39,7 +40,8 @@ print(f_test)
 
 # regression 3: ahe on female, age
 reg3 = sm.OLS(endog=df1['ahe'], exog=df1[['female', 'age', 'const']])
-results = reg2.fit()
+results = reg3.fit()
+print(results.summary())
 
 # F test
 regression = 'ahe~age+female'
@@ -64,8 +66,8 @@ df1['lage'] = np.log(df1['age'])
 df1.head()
 
 # regression 5
-reg3 = sm.OLS(endog=df1['lahe'], exog=df1[['lage','female', 'bachelor', 'const']])
-results = reg3.fit()
+reg5 = sm.OLS(endog=df1['lahe'], exog=df1[['lage','female', 'bachelor', 'const']])
+results = reg5.fit()
 print(results.summary())
 
 print(100*0.8039*(np.log(36)-np.log(35)))
