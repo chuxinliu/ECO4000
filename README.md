@@ -1,6 +1,6 @@
 # ECO4000
 ### Can you teach Python in your **Intro to Econometrics** class? 
-### YES! Here's how easy it is!
+### YES! Here's how easy it is! (Course Materials)
 
 1. Use Jupyter Notebook online version
 2. Upload the csv data file to the binder folder on Jupyter Notebook
