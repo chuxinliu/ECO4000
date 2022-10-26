@@ -1,5 +1,5 @@
 # ECO4000
-### Course Materials to teach Python in **Intro to Econometrics** class? 
+### Course Materials to teach Python in **Intro to Econometrics** class
 
 1. Use Jupyter Notebook online version --> Now I have migrated to use Google Colab
 2. Upload the data file to the folder on the left
